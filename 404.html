@@ -2,19 +2,25 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <title>Redirecting...</title>
     <script type="text/javascript">
       (function() {
+        // Get the path (e.g., /blue)
         var segments = window.location.pathname.split('/').filter(Boolean);
+        
         if (segments.length > 0) {
-          var sub = segments.shift();
-          var rest = segments.join('/');
-          window.location.replace("https://" + sub + ".sanjonescreeks.online/" + rest);
+          // If the path is /blue, this sends them to ...workers.dev/blue
+          var path = segments.join('/');
+          window.location.replace("https://proud-sky-0e47.pandesmith11.workers.dev/" + path);
         } else {
-          window.location.replace("https://sanjonescreeks.online/");
+          // If there is no path, just go to the main workers URL
+          window.location.replace("https://proud-sky-0e47.pandesmith11.workers.dev/");
         }
       })();
     </script>
-    <meta http-equiv="refresh" content="2; url=https://sanjonescreeks.online/">
+    <meta http-equiv="refresh" content="2; url=https://proud-sky-0e47.pandesmith11.workers.dev/">
   </head>
-  <body>Redirecting...</body>
+  <body>
+    <p>Redirecting to Cloudflare Workers...</p>
+  </body>
 </html>
